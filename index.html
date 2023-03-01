@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+body{margin-left: 15%;
+margin-right: 15%;}
+    div{font-family: system-ui;
+      
+    text-align: center;
+     line-height: 1.5;
+     padding: 20px;
+   }
+
+   input{font-size: 1em;
+    margin:10px;
+   padding: 10px;
+color: gold;
+   background : rgba(0,0,0,0.5);
+    border: 2px; 
+    border-color: darkred; 
+    border-style: solid;  
+    border-radius: 15px;
+  }
+
+   
+  </style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no">
+  
+  
+</head>
+<body>
+ 
+ 
+
+ 
+<div id="fon">
+  
+  <h2>Файлы загружаются по одному,<br>
+   размер файла не должен превышать 5 GB 
+ </h2>
+  <form action="https://storage.yandexcloud.net/nvp" method="post" enctype="multipart/form-data">
+
+  	<!--
+				Форма для загруки файлов в yandex cloud object storage . 
+				справочные матерьялы бытут там:
+				https://cloud.yandex.ru/docs/storage/concepts/presigned-post-forms#signing-policy
+  	-->
+  
+   <input id = 'key' type="input" name="key" value="object_key" /><br />
+   <!-- Свойства запроса -->
+   <!--input type="hidden" name="X-Amz-Credential" value="access_key_id/date/ru-central1/s3/aws4_request" /-->
+   <!--input type="hidden" name="acl" value="public-read" /-->
+   <!--input type="hidden" name="X-Amz-Algorithm" value="AWS4-HMAC-SHA256" /-->
+   <!--input type="hidden" name="X-Amz-Date" value="date" /-->
+   <!--input type="hidden" name="success_action_redirect" value="some-URL" /-->
+   <!--input type="hidden" name="policy" value="base64-encoded-policy-document" /-->
+   <!--input type="hidden" name="X-Amz-Signature" value="signature-string" /-->
+   <!-- Прочие необходимые поля -->
+   
+   <input id='file' type="file" name="file" /> <br />
+   <!-- Поля после “file” игнорируются -->
+   <input id = 'sub' type="submit" name="submit" value="Загрузить" />
+   
+</form>
+
+
+</div>
+
+
+
+<script type="text/javascript">
+
+  let preview = document.getElementById('preview')
+
+  let sub = document.getElementById('sub')
+  sub.style.display = 'none'
+ 
+
+  let keyform = document.getElementById('key')
+  keyform.style.display = 'none'
+
+
+  let input= document.getElementById('file')
+
+  input.addEventListener('change', doIt);
+
+  function doIt() {
+
+    sub.style.display = 'block'
+
+    const curFiles = input.files;
+      if(curFiles.length === 0) {
+        const para = document.createElement('p');
+        para.textContent = 'Пока что файлов не грузили';
+        document.body.appendChild(para);
+      } else {
+        if (!document.getElementById('list')){
+        const list = document.createElement('ol');
+        list.id = 'list'
+        document.body.appendChild(list);
+      }
+
+        for(const file of curFiles) {
+          const listItem = document.createElement('li');
+          const para = document.createElement('p');
+
+          if(file.size < 1073741824 * 5 ) {
+            keyform.value = file.name
+            let n= file.name
+            let s = file.size
+
+            addEventListener('submit', (event) => {
+              sub.style.display = 'none'
+              para.textContent = ` ${n}, весит ${returnFileSize(s)}.`;
+              listItem.append(para);
+              list.appendChild(listItem);
+
+            });
+
+            
+            
+
+          } else {
+            para.textContent = ` ${file.name}: Файл не пролазит про размеру.`;
+            listItem.appendChild(para);
+
+          }
+
+          
+        }
+      }
+    }
+
+
+    function returnFileSize(number) {
+      if(number < 1024) {
+        return number + 'bytes';
+      } else if(number > 1024 && number < 1048576) {
+        return (number/1024).toFixed(1) + 'KB';
+      } else if(number > 1048576 && number < 1073741824) {
+        return (number/1048576  ).toFixed(1) + 'MB';
+      } else if(number >  1073741824 ) {
+        return (number/1073741824   ).toFixed(1) + 'GB';
+      }
+    }
+  
+
+</script>
+
+
+
+
+
+ </body></html>
