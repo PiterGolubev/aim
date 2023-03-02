@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<style>
+	svg {
+  	/*background-color: rgba(0,0,0,0.9);*/
+	}
+</style>
+<script>
+
+  /*при закрузке остается шестигранник надо сделать его кликабельным
+
+по клику выдаетя метка времени.
+Потом она сохраняется в подгружаемом json
+
+и для этого надо переписывать hex в полигон
+
+ещё вопрос размеры шестигранника
+
+и прядок генерации id
+
+надо соорудить обстрактную сетку координат
+
+
+если уж есть уже свг то почему бы не нагрузить его дополнительными свойствами
+
+
+  */
+  window.onload = function(){
+
+let nb = {
+  description : 'Объект создается для того что бы можно было с большим удобством вытворять всякое с гексагонами. Идея в том что записи похорорненные в объекте болнее читаемые чем комментарии в коде и гепотетически доступны из браузера'
+}
+
+
+/*Генерация поля SVG*/
+  	let ns = "http://www.w3.org/2000/svg"
+    let svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute("height", String(document.documentElement.clientHeight))
+    svg.setAttribute("width", String(document.documentElement.clientWidth))
+    document.body.append(svg);
+
+/*координаты визуального центра*/
+    let vcntrx = Math.round(document.documentElement.clientWidth/2)
+    let vcntry = Math.round((document.documentElement.clientHeight/5)*2)
+
+    let center=startPoint = [vcntrx,vcntry]
+    let r = 50
+    let fill = randomRgb()
+    let strokeWidth = '0'
+    let strokeColor = randomRgb()
+    let id = 'test'
+
+// Центральный гексагон.
+    polygoneSvgHexId (id,r,center/*[]*/,"silver","rgba(112,205,180,1)",'1')
+
+    let radius = r
+    // высота гексагона
+    let h = Math.round((Math.sqrt((radius*radius)-Math.pow(radius/2, 2))))
+
+    svg.onclick = function (event){
+      hexInGrid (startPoint /*[]*/,[event.clientX,event.clientY]) 
+    }// end svg.onclick = function (event){ 
+
+
+nb.f13 = "На сегодня идея разобраться с viewBoxd в SVG . "      
+
+
+
+
+
+
+/*            FUNCTIOUS 
+   */
+
+
+
+
+function hexInGrid (startPoint /*[]*/, nextPoint/*[]*/){
+nb.q0 ='В функции не хватет аргументов про цвета, Id и пр. выод в самом низу. Вообще имеет смысл выделить из функции только расчет координат в сетке при заданном радиусе. Что там на этом месте воспроизводить уже другой вопрос.'
+    
+
+
+nb.q1 = 'Координаты получаются от верхнего левого угла окна, а нужно расстояние от клика до центра гексагона'
+      let dif = {
+        x : Math.abs(startPoint[0] - nextPoint[0]),
+        y : Math.abs(startPoint[1] - nextPoint[1] ),
+      }
+
+nb.q2 = 'Пересчет округление до целых гексагонов в сетке. И это расстояние делится на высоту или на полтора радиуса и округляется до целого числа. Точнее, это касается оси Y, а по оси Х шаг = 2h, но нужно учитывать смещение на h между четными и нечетными строками.   '
+      let kY = Math.round( dif.y / (radius+radius/2))// 
+      let h1 = Math.round( dif.x / h ) // полушаг
+      let h2 = 100 // что б было
+      let fX = 0 // реультирующие изысканий
+      let fY = ( startPoint[1] > nextPoint[1] ) ? startPoint[1] - kY * (r+r/2) : startPoint[1] + kY * (r+r/2)
+
+  
+// ГДЕ-ТО ЗДЕСЬ ФИГНЯ
+
+      if (kY % 2 == 0){ // для четных строк
+        if(dif.x < h || dif.x === h){ h2 = 0 }//около ноля
+        else {h2 = Math.round( dif.x / (h*2 ))}
+        fX = ( startPoint[0] > nextPoint[0]) ? startPoint[0] - h2 * 2 * h : startPoint[0] + h2 * 2 * h
+      } 
+
+      else { // для нечетных строк
+        if(dif.x < h || dif.x === h){ h2 = 1 }
+        else {
+          let foo = dif.x + h
+          h2 = Math.round( foo / (h*2 ))
+        }
+        fX = ( startPoint[0] > nextPoint[0]) ? startPoint[0] - (h2 * 2 * h- h) : startPoint[0] + (h2 * 2 * h - h)
+      }// end } else {      
+
+nb.q4 ='и выводим на экран отцентрованый гексагон, с извращениями'
+
+      polygoneSvgHex (r ,[(fX), (fY)],randomRgb(),randomRgb(),getRandomIntInclusive(3))
+} // end function hexInGrid (startPoint /*[]*/, nextPoint/*[]*/)
+
+
+      //"rgba(119,14,93,1)"
+      //"rgba(112,205,180,1)" бирюзовый 
+     
+    
+
+
+
+
+function polygoneSvgHexId (id,r,center/*[]*/,fill,strokeColor,strokeWidth){
+
+  polygoneSvgHex (r,center/*[]*/,fill,strokeColor,strokeWidth)
+
+    svg.lastChild.setAttribute('id',id)
+}// end function polygoneSvgHexId (r,center/*[]*/,fill,strokeColor,strokeWidth){
+
+
+    
+  function polygoneSvgHex (r,center/*[]*/,fill,strokeColor,strokeWidth){
+    	
+        let p = hexVertices (r,center[0],center[1])
+    
+    
+    	let polygon  = document.createElementNS(ns, 'polygon');
+        polygon.setAttribute('points', p[0][0]+','+p[0][1]+' '+ p[1][0]+','+p[1][1]+' '+ p[2][0]+','+p[2][1]+' '+ p[3][0]+','+p[3][1]+' '+ p[4][0]+','+p[4][1]+' '+ p[5][0]+','+p[5][1]);
+        polygon.setAttribute('fill', fill )
+        polygon.setAttribute('stroke',strokeColor)
+  		polygon.setAttribute('stroke-width', strokeWidth);
+        svg.append(polygon);  
+   }//function polygoneSvgHex (r,center/*[]*/,fill,strokeColor,strokeWidth){
+    
+    
+    function hexVertices (r,x,y){ //вернет массив с координатами вешин и центра
+      return [
+        /*1 (12:00)*/[Math.round(x),Math.round( y-r)],
+        /*2 (2:00)*/[Math.round(x+(Math.sqrt((r*r)-Math.pow(r/2, 2)))),Math.round(y-(r/2))],//2
+        /*3 (4:00)*/[Math.round(x+(Math.sqrt((r*r)- Math.pow(r/2, 2)))), Math.round(y+(r/2))],//3
+        /*4 (6:00)*/[Math.round(x), Math.round(y+r)],
+        /*5 (8:00)*/[Math.round(x-(Math.sqrt((r*r)-Math.pow(r/2, 2)))), Math.round(y+(r/2))],
+        /*6 (10:00)*/[Math.round(x-(Math.sqrt((r*r)-Math.pow(r/2, 2)))), Math.round(y-(r/2))],
+        /*center*/[Math.round(x),Math.round(y)]
+        ]
+    }
+
+     function randomRgb(){
+      return 'rgba('+ getRandomIntInclusive(0, 255)+','+ getRandomIntInclusive(0, 255)+','+ getRandomIntInclusive(0, 255)+',1)'}
+
+  function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
+}
+
+    }// end window.onload = function(){
+    </script>
+    
+    
+</body>
+</html>
+
+    
