@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+
+<head>
+    <style>
+        svg {
+            /*background-color: rgba(0,0,0,0.9);*/
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id='plan' style="display: none">
+
+        Прикидки структуры
+        <code>
+
+        let space {
+                (proections : {rools},)
+                    hextart :{rools},
+                    test : {rools},
+
+                elements : (elements.json),
+
+                plans:{
+
+                    expectation: {
+                        проверка каскад (устойчивые последовательноссти, причинно-следственные ли)
+                        задача 
+                    }
+                    listener
+                }
+        }
+
+        
+        let obj = {
+            birth : idm,
+            act : [[idm,end]],
+            text: text,
+            ?glif,
+            behavior:{
+                expectation : period/event
+            }
+            proection: { 'hextart':{strok, strokeWidh, fill } }
+            env: 0
+        }
+
+    
+        EXAMPLE:
+            poetry - ошмёт - связать движение белков жиров и углеводов
+
+
+            let tabak = "Сегодня сутра наростилось понимания эффкта курения табака. Индейца курили во время перегоыоров что бы изолировать себя от духов. Это важно.  Для самого растения никотин служит защитой от насееомы. Никотиовая кислота блокирует сигалы в их нервныхх ганглиях (надо уточнить что там, но примерно так).  Для меня покуривши и без разница очень очень да. Предоследние вербальные формаизации ощущения - реакуия на воод никотина срезает верхние частоты восприятия. Это красивые словеса примерно дающие представление. Сегодня сутра хорошо, весна претб хоть и снег. Из вне локации вихри приносят страсти, я покурил и да. Хорошее слово "fade" . Сквозь дым не пробивается сигнал. Табак ограничивает вхожденеи внешнего сигнала. Технология ни хороша, ни  плоха и не нейтральна. Знание сила. С гуеничкой от  безысходности по скудоумию и голодухи происходит то что её просто отрубает от мира. "
+
+
+
+
+
+
+        </code>
+
+        СЦЕНАРИЙ
+
+        Есть то что space и то что в нем - элементы. Они же объекты. За однозначностью гоняться не буду.
+        То что на экране - разные проекции space и представления объектов
+
+        Для запуска функционала представляется целесообразным начать отмечать время пробуждения. Это вполне себе
+        повторяющийся момент, имеющий своеобразную специфику. (В чем она? )
+        - фактически это не само время пробуждения а время обращения к проге после пробуждения. Это
+        пререход ото сна, а во снах тоже всякое интересное бывает что стоит отметить. Также как и время ухода в сон. ...
+        короче возникают ещё дополнительные обстоятельства, с которыми потом можно будет поразбираться.
+
+        <p> запуск пробуждения запускает каскад функций, например есть space должен делать суточную выборк ожидаемых
+            событий (напоминалок). Представляется что это не уникальная ситуация. Вообще пробуждение - о сточном ЦИКЛЕ.
+            Отслеживаие этих циклов наше всё. Я об этом много лет думаю.
+            Но это в сторону, а как это может офоормляться в коде? </p>
+
+        Но по началу погоняю тестовый объект. С тем же
+
+
+
+
+
+        <h1>HEXTART</h1>
+
+        1. Пустой экран, по клику появляется хекс (цвет тот самый, салатовй).
+        Под каптом ему сразу присвается birth в виде метки времени,
+        env : 0 (как ещё обозначить никакую вложенность?)
+        и фиксируютс ясвойства отображения в этой проекции (пусай эа проекци будет "hextart") тут нужны stroke и fill
+        полигона
+
+        <div>
+            <h2>CLick 1 Инициация объекта </h2>
+
+            <div>
+                <h3>Экран</h3>
+                возникает хекс Где? В центере или по месту клика?(function createGPolyHex()), и остатся ещё куча места
+                для того что бы вывести какие-то
+                кнопки
+
+                <h3>Под капотом</h3>
+                Создается объект и группе привсваетваается id = "g"+.birth , элементам гуппы присваевается аналогичное
+                id с префиксом по типу элемента (hex - и тд.)
+            </div>
+
+            2. По клику
+            увеличивается почти до ширины экрана (zoom) и текст вводится непосредственно в нем.
+            .
+
+            <проехали>(6.3)[3.3 автоматом открывается поле ввода, вводится название
+                Под каптом онo вводится в свойство text по сигналу enter
+                ?(как вылавливать enter?)
+                на этом поле ввода не зарывается идет "абзац" если ни какие дополнительные символы не вводятся то
+                повторный
+                enter закрывает поле ввода и оформление объекта на этом прикращается.] </проехали>
+        </div>
+
+        3. клик по любой точке дает метку времмени для end в свойстве repeat (был репит, а стал act).
+        Считается что внимание с этого объекта переключилось на что-то ещё <span>5.3 есть</span>
+
+        4.И что-то типа такого
+
+        let obj = {
+        birth : idm
+        act : [[idm,end]]
+        text: text
+        proection: { 'hextart':{strok, strokeWidh, fill } }
+        env: 0
+        }
+        преобразуется в elements.json и отправляется в бакет, так как точно известно, что никакого такого файла там нет,
+        (но можно и проверить). Но по хорошему, нужно его сперва попробовать получить, и, так как его нет, создать и
+        положить на место.
+        <div>Тут есть одно но. Если json будет храниться в бакете, то я поди несмогу его подгружать в тестовых целях? Но
+            это нужно проверить. В любом случае я могу испоьзовать IndexedDB
+        </div>
+
+
+        5. Повторный клик
+        Возникает резонный вопрос: как настраивать объект так что бы не сбивать его статистику. Для этого нужно сделать
+        проекцию настройки. (Потом) Кликнуть на него можно с двумя (как минимум) целями:
+        - добавить текста,
+        - зафиксировать титульное событие
+
+        Что и должно отобразиться на экране и под капотом то есть repeat может содержать более одной последовательности
+        или отдельное свойства: event .... а может и массив содержатьь более двух значений, третее может характеризовать
+        тип активости.
+
+
+
+<h1>ЛЕТОПИСЬ</h1>
+    <div>6.3 Переписываю</div>
+
+
+        Отличный ресурс на тему SVG
+        https://riptutorial.com/svg/example/17730/reading-writing-attributes
+
+
+    </div>
+
+    <script>
+
+
+
+
+        window.onload = hextart
+
+        function hextart() {
+
+            /*Генерация поля SVG*/
+            let ns = "http://www.w3.org/2000/svg"
+            let svg = document.createElementNS(ns, 'svg');
+            svg.setAttribute("height", String(document.documentElement.clientHeight))
+            svg.setAttribute("width", String(document.documentElement.clientWidth))
+            document.body.append(svg);
+
+            svg.addEventListener()
+
+            
+
+            //координаты визуального центра*/
+
+/*
+
+            let vcntrx = Math.round(document.documentElement.clientWidth / 2)
+            let vcntry = Math.round((document.documentElement.clientHeight / 5) * 2)
+
+            let center = startPoint = [vcntrx, vcntry]
+            let r = 50
+            let fill = randomRgb()
+            let strokeWidth = '0'
+            let strokeColor = randomRgb()
+            let id = 'test'
+
+            // Центральный гексагон.
+            polygoneSvgHexId(id, r, center/*[]*/, "silver", "rgba(112,205,180,1)", '1')
+
+
+            //= 'кликабельность центрального гексагона'
+
+            test.onclick = function (e) {
+
+                //Вообще надо рассчитыввать что этот функциоал будет использоваться не только здесь, а и в других проекциях, но то то и оно что это именно создание объекта с 0, а не обращение к существующему. Что надо отразить в названии функии.
+
+
+                // Надо разобраться с ID гексагона к котрому привязан объект
+
+                let projection = 'hextar'
+                let idm = Date.now()
+
+                let obj = {
+                    birth: idm,
+                    act: [],
+                    text: '',
+                    projections: {
+                        projection: {
+                            stroke: event.target.getAttribute('stroke'), // берутся атрибуты гекса по которому кликнуто
+                            strokeWidth: event.target.getAttribute('stroke-width'),
+                            fill: event.target.getAttribute('fill')
+                        }
+                    },
+                    env: 0,
+                }
+
+
+
+                //    Далее предстоит оформить этот объект в json и заслать его на сервер
+
+
+
+            } // test.onclick 
+
+
+
+            let radius = r
+            // высота гексагона
+            let h = Math.round((Math.sqrt((radius * radius) - Math.pow(radius / 2, 2))))
+            */
+            /*
+                        svg.onclick = function (event) {
+                            hexInGrid(startPoint, [event.clientX, event.clientY])
+                        }// end svg.onclick = function (event){ 
+            
+            */
+        }// end function hextart
+
+
+
+
+
+        /*            FUNCTIOUS SVG           */
+
+        function hexInGrid(startPoint /*[]*/, nextPoint/*[]*/) {
+            // 'В функции не хватет аргументов про цвета, Id и пр. выод в самом низу. Вообще имеет смысл выделить из функции только расчет координат в сетке при заданном радиусе. Что там на этом месте воспроизводить уже другой вопрос.'
+            // не тольку про цвета , радиус и высота (h) , берутся из вне
+
+
+
+            //'Координаты получаются от верхнего левого угла окна, а нужно расстояние от клика до центра гексагона'
+            let dif = {
+                x: Math.abs(startPoint[0] - nextPoint[0]),
+                y: Math.abs(startPoint[1] - nextPoint[1]),
+            }
+
+            //'Пересчет округление до целых гексагонов в сетке. И это расстояние делится на высоту или на полтора радиуса и округляется до целого числа. Точнее, это касается оси Y, а по оси Х шаг = 2h, но нужно учитывать смещение на h между четными и нечетными строками.   '
+            let kY = Math.round(dif.y / (radius + radius / 2))// 
+            let h1 = Math.round(dif.x / h) // полушаг
+            let h2 = 100 // что б было
+            let fX = 0 // реультирующие изысканий
+            let fY = (startPoint[1] > nextPoint[1]) ? startPoint[1] - kY * (r + r / 2) : startPoint[1] + kY * (r + r / 2)
+
+
+            if (kY % 2 == 0) { // для четных строк
+                if (dif.x < h || dif.x === h) { h2 = 0 }//около ноля
+                else { h2 = Math.round(dif.x / (h * 2)) }
+                fX = (startPoint[0] > nextPoint[0]) ? startPoint[0] - h2 * 2 * h : startPoint[0] + h2 * 2 * h
+            }
+
+            else { // для нечетных строк
+                if (dif.x < h || dif.x === h) { h2 = 1 }
+                else {
+                    let foo = dif.x + h
+                    h2 = Math.round(foo / (h * 2))
+                }
+                fX = (startPoint[0] > nextPoint[0]) ? startPoint[0] - (h2 * 2 * h - h) : startPoint[0] + (h2 * 2 * h - h)
+            }// end } else {      
+
+
+            polygoneSvgHex(r, [(fX), (fY)], randomRgb(), randomRgb(), getRandomIntInclusive(3))
+        } // end function hexInGrid (startPoint /*[]*/, nextPoint/*[]*/)
+
+
+        //"rgba(119,14,93,1)"
+        //"rgba(112,205,180,1)" бирюзовый 
+
+        function polygoneSvgHexId(id, r, center/*[]*/, fill, strokeColor, strokeWidth) {
+
+            polygoneSvgHex(r, center/*[]*/, fill, strokeColor, strokeWidth)
+
+            svg.lastChild.setAttribute('id', id)
+        }// end function polygoneSvgHexId (r,center/*[]*/,fill,strokeColor,strokeWidth){
+
+        function polygoneSvgHex(r, center/*[]*/, fill, strokeColor, strokeWidth) {
+
+            let p = hexVertices(r, center[0], center[1])
+
+
+            let polygon = document.createElementNS(ns, 'polygon');
+            polygon.setAttribute('points', p[0][0] + ',' + p[0][1] + ' ' + p[1][0] + ',' + p[1][1] + ' ' + p[2][0] + ',' + p[2][1] + ' ' + p[3][0] + ',' + p[3][1] + ' ' + p[4][0] + ',' + p[4][1] + ' ' + p[5][0] + ',' + p[5][1]);
+            polygon.setAttribute('fill', fill)
+            polygon.setAttribute('stroke', strokeColor)
+            polygon.setAttribute('stroke-width', strokeWidth);
+            svg.append(polygon);
+        }//function polygoneSvgHex (r,center/*[]*/,fill,strokeColor,strokeWidth){
+
+        function hexVertices(r, x, y) { //вернет массив с координатами вешин и центра
+            return [
+        /*1 (12:00)*/[Math.round(x), Math.round(y - r)],
+        /*2 (2:00)*/[Math.round(x + (Math.sqrt((r * r) - Math.pow(r / 2, 2)))), Math.round(y - (r / 2))],//2
+        /*3 (4:00)*/[Math.round(x + (Math.sqrt((r * r) - Math.pow(r / 2, 2)))), Math.round(y + (r / 2))],//3
+        /*4 (6:00)*/[Math.round(x), Math.round(y + r)],
+        /*5 (8:00)*/[Math.round(x - (Math.sqrt((r * r) - Math.pow(r / 2, 2)))), Math.round(y + (r / 2))],
+        /*6 (10:00)*/[Math.round(x - (Math.sqrt((r * r) - Math.pow(r / 2, 2)))), Math.round(y - (r / 2))],
+        /*center*/[Math.round(x), Math.round(y)]
+            ]
+        }
+
+
+
+
+        // MATH FUNCTIONS
+
+        function randomRgb() {
+            return 'rgba(' + getRandomIntInclusive(0, 255) + ',' + getRandomIntInclusive(0, 255) + ',' + getRandomIntInclusive(0, 255) + ',1)'
+        }
+
+        function getRandomIntInclusive(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
+        }
+
+
+
+
+        // 
+        // LIB VISUAL EFFECTS
+        //
+
+        function fadeInput(obj) {
+
+            let input = document.createElement('div')
+            input.style.position = "fixed"
+            input.style.background = "rgba(5,0,0,0.5)";
+            input.style.width = 100 + "px"
+            input.style.left = Math.round(document.documentElement.clientWidth / 2 - 50) + "px";
+            input.style.top = Math.round(document.documentElement.clientHeight / 6 + 100) + "px";
+            input.style.padding = 15 + "px"
+            input.style.fontSize = 2 + "em";
+            input.style.fontFamily = "sans-serif"
+            input.style.textAlign = "center";
+            input.style.color = "ivory";
+            input.contentEditable = "true";
+            document.body.append(input)
+
+            fadeIn(input, 500)
+
+            input.focus()
+
+            // при потере фоуса лавочка с инпутм сворачиваеся без последствий
+
+
+            input.addEventListener('keyup', resiseInput);
+
+            function resiseInput() {
+                if (input.offsetWidth > 100) {
+                    input.style.width = "auto"
+                    input.style.left = Math.round(document.documentElement.clientWidth / 2 - (input.offsetWidth / 2)) + "px"
+                }
+            }
+
+            //на первых порах инпут закрывается вводом. Вся детализация потом
+            input.addEventListener('keydown', finishInput)
+
+            function finishInput(event) { // textarea.addEventListener('keydown', (e) => {
+                if (event.key == "Enter") {
+                    input.removeEventListener('keydown', finishInput)
+                    input.removeEventListener('keyup', resiseInput)
+                    obj.text = input.innerHTML
+                    let end = Date.now()
+                    obj.act.push([idm, end])
+                    fadeOut(input, 500)
+                    input.remove()
+                }
+            };
+
+            input.onblur = function () {
+                input.removeEventListener('keydown', finishInput)
+                input.removeEventListener('keyup', resiseInput)
+                fadeOut(input, 500)
+                input.remove()
+            }
+        }
+
+
+        // плавное появление элемента на экране
+        const fadeIn = (el, timeout, display) => {
+            el.style.opacity = 0;
+            el.style.display = display || 'block';
+            el.style.transition = `opacity ${timeout}ms`;
+            setTimeout(() => {
+                el.style.opacity = 1;
+            }, 10);
+        };
+
+        const fadeOut = (el, timeout) => {
+            el.style.opacity = 1;
+            el.style.transition = `opacity ${timeout}ms`;
+            el.style.opacity = 0;
+
+            setTimeout(() => {
+                el.style.display = 'none';
+            }, timeout);
+        };
+    </script>
+
+
+</body>
