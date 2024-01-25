@@ -1,0 +1,159 @@
+<!DOCTYPE html><html><head>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no"><meta charset="utf-8">
+<style>
+</style>
+</head>
+<body>
+	
+	<div id= "middle_field"
+		style="
+			position: absolute;
+			top: 15vw;
+			height: calc(100vh - 23vw);
+			left: 0;
+			overflow: scroll;
+			scroll-behavior: smooth;
+			
+		"
+	>
+		<h2> Калибровка инпута</h2>
+		<h3>надо:</h3>
+		в первом приближении
+		<ul>
+			<li>
+		          bottom_input <br> <ul>
+			      <li> 
+				
+		логика : определяется по контексту 
+				<ul><li> при вводе запускается парсинг на предмет ключевых слов (не первоочередное)
+					</li><br><li>
+						фокус на поле
+				    </li><br><li>
+					похоже надо будет отскребать от лишних дивов при смене абзаца
+						</li><br><li>
+						</li></ul>
+			</li><br><li>
+				
+		рендер:<br><ul><li> 
+				многострочный ввод:<br>
+					Не первоочередное, но нужно уменьшать шрифт по мере накопления текста и с выравнивпния по центру со второй строки переводить на выравнивание справа
+				</li><br><li>
+					отловить цвет фона el. body, что бы поставить его как background-color: что бы html не просвечивал при скролинге
+					по типу такого <pre><code> 
+  function getTheStyle(){
+    var elem = document.getElementById("elem-container");
+    var theCSSprop = window.getComputedStyle(elem,null).getPropertyValue("height");
+    document.getElementById("output").innerHTML = theCSSprop;
+   }
+  getTheStyle();
+</code></pre>
+				</li></ul>
+				</li>
+			</ul>
+		</li><br><li>
+			
+		 &#9094 :
+		<br>
+			 <ul>обработка нажатия
+				<li> 
+					логика: по контексту<br>
+						<ul><li> если что-то в инпуте
+						запускается отлов контента из инпута
+						</li><br><li>
+						</li></ul>
+				</li><br><li>
+					
+			рендер:<br>
+				визуальное подтверждение
+			</li>
+				
+			</ul>
+		</li>
+		</ul>
+		
+	/*
+		objEditor : {
+			name : "objEditor"
+			,idm : 1705624920543 
+			tip: "facet",
+			note: " расширение tg функционалом для добавления свойств объекту ",
+			//base: ,
+			},// end objEditor :
+		*/
+	</div>
+	
+	
+	<div id="top_left_button"
+		style="
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 7vw;
+			height: 7vw;
+			border: 1px solid #7C7C7C;
+			border-left: none;
+			color:ivory;
+			font-size: 25px;
+			text-align:center;
+			padding: 8px;
+			background-color: rgba(0,40,0,1);
+		"
+	> </div>
+	
+	
+	<div id="top_header"
+		style="
+			position: fixed;
+			top: 0;
+			right:0;
+			width: 84vw;
+			height: 7vw;
+			border: 1px solid #7C7C7C;
+			color:ivory;
+			font-size: 25px;
+			text-align:c?enter;
+			padding: 8px;
+			margin: auto;
+			background-color:  rgba(0,30,0,1);
+		"
+	> obj name
+	</div id="top_header">
+	
+
+	<div id="bottom_input"
+		contenteditable="true"
+		style="
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 82vw;
+			heihgt: 8vw;
+			border: 2px solid #7C7C7C;
+			
+			font-size: 25px;
+			text-align:center;
+			padding: 8px;
+			margin-bottom: 5px;
+			background-color: rgba(0,0,0,0);
+			"
+	> </div>
+	
+	
+	<div id="send_button"
+		contenteditable="false"
+		style="
+			position: fixed;
+			bottom: 0;
+			right: 0;
+			width: 10%;
+			padding-right: 5px;
+			font-size: 50px;
+			background-color:  rgba(0,0,0,0);
+		"
+	>      &#9094
+	</div >
+	
+	<script src="shPROTOjs.js"></script>
+
+	
+</body></html>
