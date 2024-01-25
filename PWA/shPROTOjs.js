@@ -158,7 +158,7 @@ function onDOMContentLoaded (){
 				 obj.name ? document.getElementById('top_header').innerHTML = obj.name : document.getElementById('top_header').innerHTML = obj.idm;
 			}// end fn( obj ) {
 				*/
-				}// end tg
+				
 				
 	};// end gui: {
 	
