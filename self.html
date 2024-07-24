@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8">
+    <style>
+        #layoutViewport {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            visibility: hidden;
+        }
+        #bottombar {
+            position: fixed;
+            font-size: 20px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #40423E;
+            transform-origin: left bottom;
+            transform: translate(0, 0) scale(1);
+        }
+        #columnReverse {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        #row1 {
+            display: flex;
+            flex-direction: row;
+        }
+        #bottomText_Input {
+            flex: 2 1 auto;
+            outline: none;
+            color: ivory;
+            font-family: sans-serif;
+            font-size: 20px;
+            padding: 8px;
+            padding-left: 20px;
+        }
+        #sendButton {
+            flex: 0 1 auto;
+            font-size: 30px;
+            color: ivory;
+        }
+        #statikContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+        }
+        #topBar {
+            color: ivory;
+            font-family: sans-serif;
+            font-size: 20px;
+            padding: 6px;
+            background-color: #40423E;
+        }
+        #topFlexRowBox {
+            display: flex;
+            flex-direction: row;
+        }
+        #leftMenuButton {
+            flex: 0 1 auto;
+            font-size: 25px;
+        }
+        #levelUpname {
+            font-size: 15px;
+        }
+        #naming {
+            flex: 2 1 auto;
+            text-align: center;
+        }
+        #rightMenuButton {
+            flex: 0 1 auto;
+        }
+        #dots {
+            width: 25px;
+            height: 25px;
+            background-image: radial-gradient(circle, ivory 2px, transparent 3px);
+            background-size: 100% 33.33%;
+        }
+        #mainField {
+        	overflow: auto;
+            padding: 8px;
+            background-color: #F5FF94;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+	
+	<div id="layoutViewport">layoutViewport</div>
+    
+    <div id="statikContainer">
+	        <div id="topBar">  	
+		            <div id="topFlexRowBox">
+			                <div id="leftMenuButton"><sup><span id="levelUpname">выше </span>&#x2B31</sup></div>
+			                <div id="naming">perception</div>
+			                <div id="rightMenuButton"><div id="dots"></div></div>
+		            </div>
+	        </div><!-- еnd ot topBar-->
+	
+	        <div id="mainField">	
+	<!-- ВЫШЕ КОРЕЕННАЯ РАЗМЕТКА -->
+		<h1>&#9775;</h1>
+	
+	 <h2>затея</h2>
+            <p>
+                Есть <code>data.json</code>, хранимый (для начала) в indexedDB. он представляет из себя объект из объектов пользователя.
+                Корневые объекты, level0 относятся к обеспечению работоспособности системы.
+                Вообще-то исеет смысл сделать для этого отдельно self.json, в котором будут хранится служебные данные, типа нижеприведенных, в чистом виде не очень-то и нужные пользователю.
+                Нужно, например что-то , откуда app понимает что сейчас воспроизводить. Для этого организуем <em>.trail </em> или <em>.rollback</em> В него складывается метка времени момента переключения на следуюший объект и эдентификатор объекта, (тоже метка времени его создания (idm))
+                <code>
+                    self.trail = []
+                    trail.at(-1)
+                </code>
+            </p>
+            
+            
+            
+            <h3>что происходит</h3>
+            <p>
+                onDomContentLoaded <code> fn recognition(self.trail.at(-1)) </code> срабатывает проверяется наличие self в lockalStorage для начала, и если нет делается, и на экран выводится self c описаниями, допустим этими, а если есть то в trail смотрится что было последним, берётся из self или data и выводится на экран.
+            </p>
+            <p> и при этом регистрирует сеанс рабрты с собою</p>
+            <h2>конструктор оъектов</h2>
+             для начал что бы проектировать сам апп .
+            <br>
+            	По логике, объектами верхнегог уровня являются self и data и первая задача их получение. Это к тому что эти опеоации должны быть вынесены в UI
+             <br>
+             	<code><pre>
+             	self = {
+		             trail: [ [ts, idm] ]
+		             docs:{  тут встает вопрос: как хранить текст с разметкой в json?},
+             	}
+             	</pre></code>
+             	 <br>
+             	 <br>
+             	 <br>
+	
+	 <h2>ВЫВОД:</h2>
+	<p> На сегодняшний 20.7 день начинаем рисовать сохранение self в localge для обеспечения первичного функционала.
+             	 <br> и разобраться с select
+             	 <br> <code> fn etentionOn (obj)
+changeObj (obj <br>
+var timeInMs = Date.now(); </code>
+             	 <br></p>
+	
+	<!-- НИЖЕ КОРЕЕННАЯ РАЗМЕТКА -->
+		    </div><!-- еnd ot mainField-->
+      </div><!-- еnd ot statikCo8ntainer-->
+      	
+          <div id="bottombar">
+        <div id="columnReverse">
+            <div id="row1">
+                <div id="bottomText_Input" contenteditable="true"></div>
+                <div id="sendButton">&#10162;</div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <script>
+        /*
+        * БАЗОВЫЙ НЕИЗМЕНЯЕМЫЙ UI
+        * БЛОК СТАБИЛИЗАЦИЯ ВЕРХНЕЙ И НИЖНЕЙ ПАНЕЛИ
+        */
+        var bottomBar = document.getElementById('bottombar');
+         var mainField = document.getElementById('mainField');
+        var viewport = window.visualViewport;
+        
+      //  let counter = 0
+        
+        function viewportHandler() {
+            var layoutViewport = document.getElementById('layoutViewport');
+            
+                          // Since the bar is position: fixed we need to offset it by the visual
+              // viewport's offset from the layout viewport origin.
+            var offsetX = viewport.offsetLeft;
+            var offsetY = viewport.height - layoutViewport.getBoundingClientRect().height + viewport.offsetTop;
+            
+                          // You could also do this by setting style.left and style.top if you
+              // use width: 100% instead.
+            bottomBar.style.transform = 'translate(' + offsetX + 'px,' + offsetY + 'px) scale(' + 1 / viewport.scale + ')';
+            
+            //мои добавления:	
+					document.getElementById('mainField').style.height = viewport.height - document.getElementById('topBar').getBoundingClientRect().height - document.getElementById('bottombar').getBoundingClientRect().height  + 'px'
+					
+   }
+        
+        
+      
+        
+        
+        window.visualViewport.addEventListener('scroll', viewportHandler);
+        window.visualViewport.addEventListener('resize', viewportHandler);
+        /* КОНЕЦ БЛОКА СТАБИЛИЗАЦИЯ ВЕРХНЕЙ И НИЖНЕЙ ПАНЕЛИ */
+        
+        //--------------//--------------//--------------
+        
+        
+        /*SELF RECOGNITION
+        * к этому моменту адо уже иметь подключенеые с сервера self и data, но тут их нет по этому пишим их с нуля
+        */
+
+        let self = { 
+        	name : "SELF",
+        	data : { },
+	        level : 0
+        	trail : [ ] ,
+        	documentation : { },
+            baseUI : function ( obj){         	
+            	if (document.getElementById('naming')){
+					document.getElementById('naming').innerHTML = obj.name;
+					 } else { 
+					repairBaseUI( ) ; 
+					self.baseUI(obj) 
+				}// end if (document.getElementById('naming')){				
+					if (document.getElementById('mainField')){
+								for (const key in obj) {
+								 if (typeof rect[key] !== "function") {
+								    let para = document.createElement("p");
+								    para.textContent = "<h2>" + key +" </h2>";
+								    document.getElementById('mainField').appendChild(para);
+								} else {
+									    let para = document.createElement("p");
+								    para.textContent ="<h3>" + key +" </h3>";
+								    document.getElementById('mainField').appendChild(para);
+								}// end  if (typeof rect[key] !== "function") { ... else
+							}// end for (const key in obj) {
+					 } else { 
+						repairBaseUI( ) ; 
+						self.baseUI(obj) 
+					}// end if if (document.getElementById('naming')){				
+            	},// end baseUI : function ( obj){ 
+        }// end self{ }
+        
+        let s = self;
+        s.t= self.trail;
+        s.d = self.documentation;
+        
+        let data = { };
+        
+        function addObj (obj){
+        	/*Добавление нового объекта в Data
+        */
+		        let idm = Date.now();       
+		data[idm] = obj
+        	}// end  function addObj (obj){
+        
+        
+
+
+        function storageAvailable(type) {
+    try {
+        var storage = window[type],
+            x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return false;
+    }
+}// end function storageAvailable(type) {
+        
+
+                
+        function zapusk(){ 
+			if (storageAvailable('localStorage')) {
+				
+				if (localStorage.getItem("self")){
+					self = JSON.parse(localStorage.getItem("self"));
+					data = JSON.parse(localStorage.getItem("data"));
+					}
+					else {
+						self.baseUI(self)
+							 }
+						
+						/* А вот тут надо подумать 
+						* Это тестовая конструкция, в боевом варианте ни какой локал стораж вообще не гужен.
+						*/
+						
+					}// end if (localStorage.getItem("self")){ ... else
+		
+			 
+			}// конец iif (storageAvailable('localStorage'))
+			else {
+			    alert (" Too bad, no localStorage for us ")
+			}//end if (storageAvailable('localStorage')) {...else			
+        }//end function zapusk(){
+        	
+        
+        
+        addEventListener("DOMContentLoaded", zapusk);
+                /*END SELF RECOGNITION
+        */
+        
+        /*REPAIR KIT
+        */
+        function repairBaseUI( ) { alert("когда-нибудь напишу, или аи попрошу")}
+        
+          /*ВСПОМОГАТЕЛЬНОЕ И СНИПЕТЫ
+          
+          
+                    function displayHeight (id) {
+                   	let elem = document.getElementById(id)
+			            let rect = elem.getBoundingClientRect();
+			            let para = document.createElement("p");
+					    pxvuuguara.textContent = id +rect.height;
+					    document.getElementById('mainField').appendChild(para);
+					}
+        
+        function displayBoundingClientRect (element) {
+	        document.getElementById('mainField').innerHTML= " "
+        	let elem = document.getElementById('bottombar')
+			let rect = elem.getBoundingClientRect();
+			for (const key in rect) {
+				  if (typeof rect[key] !== "function") {
+					    let para = document.createElement("p");
+					    para.textContent = `${key} : ${rect[key]}`;
+					    document.getElementById('mainField').appendChild(para);
+				  }
+			}
+        }// end function displayBoundingClientRect (element)
+   */
+    </script>
+</body>
+</html>
