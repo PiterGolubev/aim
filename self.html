@@ -35,7 +35,7 @@
             font-family: sans-serif;
             font-size: 20px;
             padding: 8px;
-            padding-left:9 20px;
+            padding-left: 20px;
         }
         #sendButton {
             flex: 0 1 auto;
@@ -142,7 +142,7 @@
 	<p> На сегодняшний 20.7 день начинаем рисовать сохранение self в localge для обеспечения первичного функционала.
              	 <br> и разобраться с select
              	 <br> <code> fn etentionOn (obj)
-changeObj (obj <br>
+changeObj (obj) <br>
 var timeInMs = Date.now(); </code>
              	 <br></p>
 	
@@ -168,10 +168,10 @@ var timeInMs = Date.now(); </code>
         * БЛОК СТАБИЛИЗАЦИЯ ВЕРХНЕЙ И НИЖНЕЙ ПАНЕЛИ
         */
         var bottomBar = document.getElementById('bottombar');
-         var mainField = document.getElementById('mainField');
+        var mainField = document.getElementById('mainField');
         var viewport = window.visualViewport;
         
-      //  let counter = 0
+     
         
         function viewportHandler() {
             var layoutViewport = document.getElementById('layoutViewport');
@@ -208,7 +208,7 @@ var timeInMs = Date.now(); </code>
         let self = { 
         	name : "SELF",
         	data : { },
-	        level : 0
+	        level : 0,
         	trail : [ ] ,
         	documentation : { },
             baseUI : function ( obj){         	
@@ -219,27 +219,21 @@ var timeInMs = Date.now(); </code>
 					self.baseUI(obj) 
 				}// end if (document.getElementById('naming')){				
 					if (document.getElementById('mainField')){
+                        document.getElementById('mainField').innerHTML = '';
+
 								for (const key in obj) {
-								 if (typeof rect[key] !== "function") {
 								    let para = document.createElement("p");
 								    para.textContent = "<h2>" + key +" </h2>";
 								    document.getElementById('mainField').appendChild(para);
-								} else {
-									    let para = document.createElement("p");
-								    para.textContent ="<h3>" + key +" </h3>";
-								    document.getElementById('mainField').appendChild(para);
 								}// end  if (typeof rect[key] !== "function") { ... else
-							}// end for (const key in obj) {
-					 } else { 
+						} else { 
+                        alert('problems')
 						repairBaseUI( ) ; 
 						self.baseUI(obj) 
 					}// end if if (document.getElementById('naming')){				
             	},// end baseUI : function ( obj){ 
         }// end self{ }
         
-        let s = self;
-        s.t= self.trail;
-        s.d = self.documentation;
         
         let data = { };
         
@@ -276,18 +270,10 @@ var timeInMs = Date.now(); </code>
 					data = JSON.parse(localStorage.getItem("data"));
 					}
 					else {
+                        
 						self.baseUI(self)
 							 }
-						
-						/* А вот тут надо подумать 
-						* Это тестовая конструкция, в боевом варианте ни какой локал стораж вообще не гужен.
-						*/
-						
-					}// end if (localStorage.getItem("self")){ ... else
-		
-			 
-			}// конец iif (storageAvailable('localStorage'))
-			else {
+			}else{
 			    alert (" Too bad, no localStorage for us ")
 			}//end if (storageAvailable('localStorage')) {...else			
         }//end function zapusk(){
